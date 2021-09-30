@@ -4,12 +4,13 @@ from setuptools import setup
 
 setup(
     name="httpie-lambda",
-    version="0.2",
+    version="0.3",
     description="AWS Lambda invoke transport plugin for HTTPie",
     long_description=open("README.rst").read().strip(),
     author="Ilya Sukhanov",
     author_email="ilya@sukhanov.net",
     url="https://github.com/IlyaSukhanov/httpie-lambda",
+    py_modules=["httpie_lambda"],
     install_requires=[
         "lambda-requests>=1.4",
         "httpie>=2.5.0",
