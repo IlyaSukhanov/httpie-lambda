@@ -26,25 +26,26 @@ BROWSER := python -c "$$BROWSER_PYSCRIPT"
 help:
 	@python -c "$$PRINT_HELP_PYSCRIPT" < $(MAKEFILE_LIST)
 
-clean: clean-build clean-pyc clean-test ## remove all build, test, coverage and Python artifacts
-
 format: ## auto format all code
-	isort httpie_lambda.py setup.py
-	black httpie_lambda.py setup.py
+	isort httpie_lambda.py setup.py tests
+	black httpie_lambda.py setup.py tests
 
 isort: ## check imports with isort
-	isort -c httpie_lambda.py setup.py
+	isort -c httpie_lambda.py setup.py tests
 
 black: ## check formatting with black
-	black --check httpie_lambda.py setup.py
+	black --check httpie_lambda.py setup.py tests
 
 lint: ## check style with flake8
-	flake8 httpie_lambda.py setup.py 
+	flake8 httpie_lambda.py setup.py tests
 
 test-security:
 	bandit httpie_lambda.py
 
-test-all: isort black lint test-security
+test: ## run tests quickly with the default Python
+	py.test tests --cov=httpie_lambda --cov-fail-under=100 --cov-report term-missing -s
+
+test-all: isort black lint test-security test
 
 install: clean ## install the package to the active Python's site-packages
 	pip install . --upgrade

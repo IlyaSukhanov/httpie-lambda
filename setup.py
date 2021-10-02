@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="httpie-lambda",
-    version="0.4",
+    version="1.0",
     description="AWS Lambda invoke transport plugin for HTTPie",
     long_description=open("README.rst").read().strip(),
     author="Ilya Sukhanov",
